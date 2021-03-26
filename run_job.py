@@ -18,20 +18,32 @@ def get_env(key):
             .format(key=key))
     return value
 
-
-
-
-# Create the IFTTT Webhook URL 
+# Read all the environment variables first, so all is known before we send
+# any http requests.
 ifttt_key = get_env('IFTTT_WEBHOOK_KEY')
 ifttt_event_name = get_env('IFTTT_WEBHOOK_EVENT_NAME')
 
-IFTTT_URL = "https://maker.ifttt.com/trigger/{event}/with/key/{key}"\
-    .format(event=ifttt_event_name, key=ifttt_key)
 
+#TODO add some code to get some data somewhere
+
+
+# Assign the variables that can be used in the payload of the IFTTT trigger
+# request
+#TODO assign relevant values to these variables if needed
+value1 = "value1"
+value2 = "value2"
+value3 = "value3"
+
+# Create the json payload
+json = { "value1" : value1, "value2" : value2, "value3" : value3 }
+
+# Create the IFTTT Webhook URL 
+ifttt_url = "https://maker.ifttt.com/trigger/{event}/with/key/{key}"\
+    .format(event=ifttt_event_name, key=ifttt_key)
 
 # sending the IFTTT webhook request 
 print("Sending trigger to IFTTT event {}".format(ifttt_event_name))
-r = requests.get(url = IFTTT_URL) 
+r = requests.get(url = ifttt_url,) 
 if (r.ok):
     print("Success ({})".format(r.status_code))
 else:
